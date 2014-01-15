@@ -19,8 +19,17 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    self.nameStore = [RosterNamesStore rosterNamesStore];
+    
     self.namesTableView.delegate = self;
-    self.namesTableView.dataSource = self;
+    
+    NamesTableViewDataSource *namesTableDataSource = [[NamesTableViewDataSource alloc] init];
+    self.namesTableDataSource = namesTableDataSource;
+    self.namesTableView.dataSource = self.namesTableDataSource;
+    
+    self.sortActionSheet.delegate = self;
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,72 +56,9 @@
     [self.refreshControl beginRefreshing];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameCell" forIndexPath:indexPath];
-    
-    NSString *name;
-    
-    /** Cell text for a teacher */
-    if (indexPath.section == 0) {
-        CodeFellow *codeFellowTeacher = [[[RosterNamesStore rosterNamesStore] codeFellowTeachers] objectAtIndex:indexPath.row];
-        name = [NSString stringWithFormat:@"%@ %@", codeFellowTeacher.firstName, codeFellowTeacher.lastName];
-    }
-    
-    /** Define the cell text for a student */
-    if (indexPath.section == 1) {
-        CodeFellow *codeFellowStudent = [[[RosterNamesStore rosterNamesStore] codeFellowStudents] objectAtIndex:indexPath.row];
-        name = [NSString stringWithFormat:@"%@ %@", codeFellowStudent.firstName, codeFellowStudent.lastName];
-    }
-    
-    cell.textLabel.text = name;
-    
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    switch (section) {
-            /** Teachers Section **/
-        case 0:
-            return [[[RosterNamesStore rosterNamesStore] codeFellowTeachers] count];
-            break;
-            
-            /** Student Section **/
-        case 1:
-            return [[[RosterNamesStore rosterNamesStore] codeFellowStudents] count];
-            break;
-            
-        default:
-            return 1;
-            break;
-    }
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 2;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *title;
-    
-    switch (section) {
-        case 0:
-            title = @"Teachers";
-            break;
-            
-        case 1:
-            title = @"Students";
-            break;
-            
-        default:
-            title = @"Missing Title";
-            break;
-    }
-    
-    return title;
+    [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -125,15 +71,61 @@
         
         switch (indexPath.section) {
             case 0:
-                detailVC.theCodeFellow = [[[RosterNamesStore rosterNamesStore] codeFellowTeachers] objectAtIndex:indexPath.row];
+                detailVC.theCodeFellow = [[self.nameStore codeFellowTeachers] objectAtIndex:indexPath.row];
                 break;
                 
             case 1:
-                detailVC.theCodeFellow = [[[RosterNamesStore rosterNamesStore] codeFellowStudents] objectAtIndex:indexPath.row];
+                detailVC.theCodeFellow = [[self.nameStore codeFellowStudents] objectAtIndex:indexPath.row];
                 
             default:
                 break;
         }
+    }
+}
+
+- (IBAction)sortTable:(id)sender
+{
+    self.sortActionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort By:"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Ascending", @"Descending", nil];
+    
+    [self.sortActionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        NSArray *sortDescriptors = @[nameDescriptor];
+        NSArray *sortedNames = [[self.nameStore listOfAllNames] sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"%@", sortedNames);
+        
+        [self.nameStore setListOfCodeFellows:sortedNames];
+        
+        [self.namesTableView reloadData];
+        
+        /**
+         * Need to figure out why the table view is not reloading the rows.
+         * The sort descriptor is working, but the table is not updating.
+         */
+    }
+    
+    if (buttonIndex == 1) {
+        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+        NSArray *sortDescriptors = @[nameDescriptor];
+        NSArray *sortedNames = [[self.nameStore listOfAllNames] sortedArrayUsingDescriptors:sortDescriptors];
+        NSLog(@"%@", sortedNames);
+        
+        [self.nameStore setListOfCodeFellows:sortedNames];
+        
+        [self.namesTableView reloadData];
+        
+        /**
+         * Need to figure out why the table view is not reloading the rows.
+         * The sort descriptor is working, but the table is not updating.
+         */
     }
 }
 

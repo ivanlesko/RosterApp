@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "CodeFellow.h"
 
+/**
+ * This view controller controls the detail page
+ * when a code fellow is clicked on the 
+ * names table view
+ */
 @interface CodeFellowDetailViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;

@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CodeFellow : NSObject
+@interface CodeFellow : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSString *firstName;
-@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *category;
-
-@property (nonatomic, strong) NSString *randomFact;
+@property (nonatomic, strong) NSString *github;
+@property (nonatomic, strong) NSString *twitter;
 
 /** This is the designated initializer */
-- (id)initWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andCategory:(NSString *)category;
+- (id)initWithName:(NSString *)theName
+       andCategory:(NSString *)theCategory
+         andGithub:(NSString *)theGithub
+        andTwitter:(NSString *)theTwitter;
 
 @end

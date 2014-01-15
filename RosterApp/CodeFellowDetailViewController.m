@@ -27,13 +27,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.descriptionLabel.shadowColor = [UIColor blackColor];
+    self.descriptionLabel.shadowOffset = CGSizeMake(1, 1);
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.descriptionLabel.text = [NSString stringWithFormat:@"%@ %@ is a Code Fellows %@!", self.theCodeFellow.firstName, self.theCodeFellow.lastName, self.theCodeFellow.category];
+    self.descriptionLabel.text = [NSString stringWithFormat:@"%@", self.theCodeFellow.name];
     
-    self.navItem.title = [NSString stringWithFormat:@"%@ %@", self.theCodeFellow.firstName, self.theCodeFellow.lastName];
+    self.navItem.title = [NSString stringWithFormat:@"%@", self.theCodeFellow.name];
 }
 
 - (void)didReceiveMemoryWarning

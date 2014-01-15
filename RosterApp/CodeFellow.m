@@ -14,25 +14,51 @@
 {
     self = [super init];
     if (self) {
-        self.firstName = @"First";
-        self.lastName  = @"Last";
-        self.category  = @"Category";
+        self.name     = @"Missing Name";
+        self.category = @"Missing Category";
+        self.github   = @"Missing Github";
+        self.twitter  = @"Missing Twitter";
     }
     
     return self;
 }
 
 
-- (id)initWithFirstName:(NSString *)firstName andLastName:(NSString *)lastName andCategory:(NSString *)category
+- (id)initWithName:(NSString *)theName
+       andCategory:(NSString *)theCategory
+         andGithub:(NSString *)theGithub
+        andTwitter:(NSString *)theTwitter;
 {
     self = [super init];
     if (self) {
-        self.firstName = firstName;
-        self.lastName  = lastName;
-        self.category  = category;
+        self.name     = theName;
+        self.category = theCategory;
+        self.github   = theGithub;
+        self.twitter  = theTwitter;
     }
     
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+

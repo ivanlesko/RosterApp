@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "CodeFellow.h"
+#import "NamesController.h"
+
+/**
+ * RosterNamesStore is a singleton model object that contains 
+ * info about every Code Fellow.
+ */
 
 @interface RosterNamesStore : NSObject
 {
@@ -15,12 +21,20 @@
     NSMutableArray *codeFellowTeachers;
 }
 
+/** Returns the RosterNamesStore singleton. */
 + (RosterNamesStore *)rosterNamesStore;
 
+/** Returns all Code Fellows students. */
 - (NSMutableArray *)codeFellowStudents;
+
+/** Returns all Code Fellows teachers. */
 - (NSMutableArray *)codeFellowTeachers;
 
-- (void)addCodeFellowStudent:(CodeFellow *)theCodeFellow;
-- (void)addCodeFellowTeacher:(CodeFellow *)theCodeFellow;
+- (NSMutableArray *)listOfAllNames;
+
+/** Adds a Code Fellow to the listOfCodeFellows array */
+- (void)addCodeFellow:(CodeFellow *)theCodeFellow;
+
+@property (nonatomic, strong) NSMutableArray *listOfCodeFellows;
 
 @end

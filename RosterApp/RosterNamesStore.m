@@ -15,6 +15,10 @@
     self = [super init];
     if (self) {
         
+        self.listOfCodeFellows  = [NSMutableArray array];
+        codeFellowStudents = [NSMutableArray array];
+        codeFellowTeachers = [NSMutableArray array];
+        
         [self populateCodeFellowsStore];
     }
     
@@ -25,7 +29,8 @@
 {
     static RosterNamesStore *rosterNamesStore = nil;
     if (!rosterNamesStore) {
-        rosterNamesStore = [[super allocWithZone:nil] init];
+        rosterNamesStore = [[super alloc] init];
+        
     }
     
     return rosterNamesStore;
@@ -41,66 +46,35 @@
     return codeFellowTeachers;
 }
 
-- (void)addCodeFellowStudent:(CodeFellow *)theCodeFellow
+- (void)addCodeFellow:(CodeFellow *)theCodeFellow
 {
-    [codeFellowStudents addObject:theCodeFellow];
-}
-
-- (void)addCodeFellowTeacher:(CodeFellow *)theCodeFellow
-{
-    [codeFellowTeachers addObject:theCodeFellow];
+    if ([theCodeFellow.category isEqualToString:@"Teacher"]) {
+        [codeFellowTeachers addObject:theCodeFellow];
+    } else if ([theCodeFellow.category isEqualToString:@"Student"]) {
+        [codeFellowStudents addObject:theCodeFellow];
+    }
 }
 
 - (void)populateCodeFellowsStore
 {
-    /** These are the current CodeFellow iOS Students **/
-    CodeFellow *nicholasBernard = [[CodeFellow alloc] initWithFirstName:@"Nicholas" andLastName:@"Bernard" andCategory:@"Student"];
-    CodeFellow *zuriBiringer    = [[CodeFellow alloc] initWithFirstName:@"Zuri" andLastName:@"Biringer" andCategory:@"Student"];
-    CodeFellow *chadColby       = [[CodeFellow alloc] initWithFirstName:@"Chad" andLastName:@"Colby" andCategory:@"Student"];
-    CodeFellow *spencerFornaciari = [[CodeFellow alloc] initWithFirstName:@"Spencer" andLastName:@"Fornaciari" andCategory:@"Student"];
-    CodeFellow *raghavHaran     = [[CodeFellow alloc] initWithFirstName:@"Raghav" andLastName:@"Haran" andCategory:@"Student"];
-    CodeFellow *timothyHise     = [[CodeFellow alloc] initWithFirstName:@"Timothy" andLastName:@"Hise" andCategory:@"Student"];
-    CodeFellow *ivanLesko       = [[CodeFellow alloc] initWithFirstName:@"Ivan" andLastName:@"Lesko" andCategory:@"Student"];
-    CodeFellow *richardLichkus  = [[CodeFellow alloc] initWithFirstName:@"Richard" andLastName:@"Lichkus" andCategory:@"Student"];
-    CodeFellow *bennetBennett   = [[CodeFellow alloc] initWithFirstName:@"Bennett Lin" andLastName:@"Bennett" andCategory:@"Student"];
-    CodeFellow *christopherMeehan = [[CodeFellow alloc] initWithFirstName:@"Christopher" andLastName:@"Meehan" andCategory:@"Student"];
-    CodeFellow *mattRemick      = [[CodeFellow alloc] initWithFirstName:@"Matt" andLastName:@"Remick" andCategory:@"Student"];
-    CodeFellow *andrewRodgers   = [[CodeFellow alloc] initWithFirstName:@"Andrew" andLastName:@"Rodgers" andCategory:@"Student"];
-    CodeFellow *jeffSchwab      = [[CodeFellow alloc] initWithFirstName:@"Jeff" andLastName:@"Schwab" andCategory:@"Student"];
-    CodeFellow *stevenStevenson = [[CodeFellow alloc] initWithFirstName:@"Steven" andLastName:@"Stevenson" andCategory:@"Student"];
-    CodeFellow *yairSzarf       = [[CodeFellow alloc] initWithFirstName:@"Yair" andLastName:@"Szarf" andCategory:@"Student"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
     
-    codeFellowStudents = [NSMutableArray arrayWithObjects:
-                                                       nicholasBernard,
-                                                       zuriBiringer,
-                                                       chadColby,
-                                                       spencerFornaciari,
-                                                       raghavHaran,
-                                                       timothyHise,
-                                                       ivanLesko,
-                                                       richardLichkus,
-                                                       bennetBennett,
-                                                       christopherMeehan,
-                                                       mattRemick,
-                                                       andrewRodgers,
-                                                       jeffSchwab,
-                                                       stevenStevenson,
-                                                       yairSzarf,
-                                                       nil];
+    self.listOfCodeFellows = [NamesController arrayOfStudentsForPlist:path];
     
-    /** These are the current CodeFellow iOS Teachers **/
-    CodeFellow *ivanStorck      = [[CodeFellow alloc] initWithFirstName:@"Ivan" andLastName:@"Storck" andCategory:@"Teacher"];
-    CodeFellow *johnClem        = [[CodeFellow alloc] initWithFirstName:@"John" andLastName:@"Clem" andCategory:@"Teacher"];
-    CodeFellow *bradJohnson     = [[CodeFellow alloc] initWithFirstName:@"Brad" andLastName:@"Johnson" andCategory:@"Teacher"];
-    
-    codeFellowTeachers = [NSMutableArray arrayWithObjects:
-                          ivanStorck,
-                          johnClem,
-                          bradJohnson,
-                          nil];
+    for (NSDictionary *codeFellow in self.listOfCodeFellows) {
+        CodeFellow *newCodeFellow = [[CodeFellow alloc] initWithName:codeFellow[@"name"]
+                                                         andCategory:codeFellow[@"category"]
+                                                           andGithub:codeFellow[@"github"]
+                                                          andTwitter:codeFellow[@"twitter"]];
+        
+        [self addCodeFellow:newCodeFellow];
+    }
 }
 
-
+- (NSMutableArray *)listOfAllNames
+{
+    return self.listOfCodeFellows;
+}
 
 @end
 
