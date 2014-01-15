@@ -50,6 +50,18 @@
     
 }
 
+- (NSString *)description
+{
+    NSString *descriptionString;
+    descriptionString = [NSString stringWithFormat:@"%@ is a %@. Twitter: %@, Github: %@",
+                         self.name,
+                         self.category,
+                         self.twitter,
+                         self.github];
+    
+    return descriptionString;
+}
+
 @end
 
 

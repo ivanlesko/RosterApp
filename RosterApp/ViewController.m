@@ -19,13 +19,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.nameStore = [RosterNamesStore rosterNamesStore];
+    self.nameStore = [ModelController modelController];
     
     self.namesTableView.delegate = self;
-    
-    NamesTableViewDataSource *namesTableDataSource = [[NamesTableViewDataSource alloc] init];
-    self.namesTableDataSource = namesTableDataSource;
-    self.namesTableView.dataSource = self.namesTableDataSource;
+
+    self.namesTableView.dataSource = self.nameStore;
     
     self.sortActionSheet.delegate = self;
     
@@ -52,7 +50,6 @@
 
 - (void)refreshTableView
 {
-    NSLog(@"refreshing table view");
     [self.refreshControl beginRefreshing];
 }
 
@@ -69,19 +66,15 @@
         
         CodeFellowDetailViewController *detailVC = [segue destinationViewController];
         
-        switch (indexPath.section) {
-            case 0:
-                detailVC.theCodeFellow = [[self.nameStore codeFellowTeachers] objectAtIndex:indexPath.row];
-                break;
-                
-            case 1:
-                detailVC.theCodeFellow = [[self.nameStore codeFellowStudents] objectAtIndex:indexPath.row];
-                
-            default:
-                break;
+        if (indexPath.section == 0) {
+            detailVC.theCodeFellow = [[self.nameStore teachers] objectAtIndex:indexPath.row];
+        } else if (indexPath.section == 1) {
+            detailVC.theCodeFellow = [[self.nameStore students] objectAtIndex:indexPath.row];
         }
     }
 }
+
+#pragma mark - Sort Action Sheet Methods
 
 - (IBAction)sortTable:(id)sender
 {
@@ -99,26 +92,19 @@
     if (buttonIndex == 0) {
         NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
         NSArray *sortDescriptors = @[nameDescriptor];
-        NSArray *sortedNames = [[self.nameStore listOfAllNames] sortedArrayUsingDescriptors:sortDescriptors];
-        NSLog(@"%@", sortedNames);
         
-        [self.nameStore setListOfCodeFellows:sortedNames];
+        [self.nameStore sortCodeFellowsUsingSortDescriptors:sortDescriptors];
         
         [self.namesTableView reloadData];
         
-        /**
-         * Need to figure out why the table view is not reloading the rows.
-         * The sort descriptor is working, but the table is not updating.
-         */
+        NSLog(@"Ascending");
     }
     
     if (buttonIndex == 1) {
         NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
         NSArray *sortDescriptors = @[nameDescriptor];
-        NSArray *sortedNames = [[self.nameStore listOfAllNames] sortedArrayUsingDescriptors:sortDescriptors];
-        NSLog(@"%@", sortedNames);
         
-        [self.nameStore setListOfCodeFellows:sortedNames];
+        [self.nameStore sortCodeFellowsUsingSortDescriptors:sortDescriptors];
         
         [self.namesTableView reloadData];
         

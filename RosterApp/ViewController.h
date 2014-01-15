@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RosterNamesStore.h"
+#import "ModelController.h"
 #import "CodeFellowDetailViewController.h"
-#import "NamesController.h"
-#import "NamesTableViewDataSource.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UIActionSheetDelegate>
 
-@property (nonatomic) RosterNamesStore *nameStore;
-@property (nonatomic, strong) NamesTableViewDataSource *namesTableDataSource;
+@property (nonatomic) ModelController *nameStore;
 
 @property (weak, nonatomic) IBOutlet UITableView *namesTableView;
 

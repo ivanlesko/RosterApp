@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E20A03F1885DC5000D267CC /* Bootcamp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A03E1885DC5000D267CC /* Bootcamp.plist */; };
-		4E20A0421885E62700D267CC /* NamesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E20A0411885E62700D267CC /* NamesController.m */; };
-		4E3A1B141886384700424E5D /* NamesTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A1B131886384700424E5D /* NamesTableViewDataSource.m */; };
 		4E3A1B1B188641D800424E5D /* codeFellowsBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E3A1B1A188641D800424E5D /* codeFellowsBG.png */; };
 		4EAF15DD18849A9900171D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF15DC18849A9900171D7E /* Foundation.framework */; };
 		4EAF15DF18849A9900171D7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF15DE18849A9900171D7E /* CoreGraphics.framework */; };
@@ -25,8 +23,7 @@
 		4EAF15FE18849A9900171D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF15E018849A9900171D7E /* UIKit.framework */; };
 		4EAF160618849A9900171D7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EAF160418849A9900171D7E /* InfoPlist.strings */; };
 		4EAF160818849A9900171D7E /* RosterAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF160718849A9900171D7E /* RosterAppTests.m */; };
-		4EAF161318849DA900171D7E /* RosterNamesStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF161218849DA900171D7E /* RosterNamesStore.m */; };
-		4EAF161F1884A1E800171D7E /* AddNewCodeFellowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF161E1884A1E800171D7E /* AddNewCodeFellowViewController.m */; };
+		4EAF161318849DA900171D7E /* ModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF161218849DA900171D7E /* ModelController.m */; };
 		4EBD23421884A9ED0019E705 /* CodeFellowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */; };
 		4EBD23451884B3D80019E705 /* CodeFellow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD23441884B3D80019E705 /* CodeFellow.m */; };
 /* End PBXBuildFile section */
@@ -43,10 +40,6 @@
 
 /* Begin PBXFileReference section */
 		4E20A03E1885DC5000D267CC /* Bootcamp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Bootcamp.plist; sourceTree = "<group>"; };
-		4E20A0401885E62700D267CC /* NamesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamesController.h; sourceTree = "<group>"; };
-		4E20A0411885E62700D267CC /* NamesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NamesController.m; sourceTree = "<group>"; };
-		4E3A1B121886384700424E5D /* NamesTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamesTableViewDataSource.h; sourceTree = "<group>"; };
-		4E3A1B131886384700424E5D /* NamesTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NamesTableViewDataSource.m; sourceTree = "<group>"; };
 		4E3A1B1A188641D800424E5D /* codeFellowsBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = codeFellowsBG.png; sourceTree = "<group>"; };
 		4EAF15D918849A9900171D7E /* RosterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RosterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EAF15DC18849A9900171D7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -67,10 +60,8 @@
 		4EAF160318849A9900171D7E /* RosterAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RosterAppTests-Info.plist"; sourceTree = "<group>"; };
 		4EAF160518849A9900171D7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4EAF160718849A9900171D7E /* RosterAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RosterAppTests.m; sourceTree = "<group>"; };
-		4EAF161118849DA900171D7E /* RosterNamesStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterNamesStore.h; sourceTree = "<group>"; };
-		4EAF161218849DA900171D7E /* RosterNamesStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterNamesStore.m; sourceTree = "<group>"; };
-		4EAF161D1884A1E800171D7E /* AddNewCodeFellowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewCodeFellowViewController.h; sourceTree = "<group>"; };
-		4EAF161E1884A1E800171D7E /* AddNewCodeFellowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewCodeFellowViewController.m; sourceTree = "<group>"; };
+		4EAF161118849DA900171D7E /* ModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelController.h; sourceTree = "<group>"; };
+		4EAF161218849DA900171D7E /* ModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelController.m; sourceTree = "<group>"; };
 		4EBD23401884A9ED0019E705 /* CodeFellowDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeFellowDetailViewController.h; sourceTree = "<group>"; };
 		4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeFellowDetailViewController.m; sourceTree = "<group>"; };
 		4EBD23431884B3D80019E705 /* CodeFellow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeFellow.h; sourceTree = "<group>"; };
@@ -101,6 +92,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E1016BD18870A060073D554 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4E1016BE18870A0D0073D554 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4E1016BF18870A120073D554 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4EAF161118849DA900171D7E /* ModelController.h */,
+				4EAF161218849DA900171D7E /* ModelController.m */,
+				4EBD23431884B3D80019E705 /* CodeFellow.h */,
+				4EBD23441884B3D80019E705 /* CodeFellow.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		4E3A1B1518863E3900424E5D /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,27 +158,20 @@
 		4EAF15E218849A9900171D7E /* RosterApp */ = {
 			isa = PBXGroup;
 			children = (
+				4E1016BF18870A120073D554 /* Models */,
+				4E1016BE18870A0D0073D554 /* Views */,
+				4E1016BD18870A060073D554 /* Controllers */,
+				4EAF15F118849A9900171D7E /* ViewController.h */,
+				4EAF15F218849A9900171D7E /* ViewController.m */,
+				4EBD23401884A9ED0019E705 /* CodeFellowDetailViewController.h */,
+				4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */,
 				4E3A1B1518863E3900424E5D /* Images */,
 				4E20A03E1885DC5000D267CC /* Bootcamp.plist */,
 				4EAF15EB18849A9900171D7E /* AppDelegate.h */,
 				4EAF15EC18849A9900171D7E /* AppDelegate.m */,
 				4EAF15EE18849A9900171D7E /* Main.storyboard */,
-				4EAF15F118849A9900171D7E /* ViewController.h */,
-				4EAF15F218849A9900171D7E /* ViewController.m */,
 				4EAF15F418849A9900171D7E /* Images.xcassets */,
 				4EAF15E318849A9900171D7E /* Supporting Files */,
-				4EAF161118849DA900171D7E /* RosterNamesStore.h */,
-				4EAF161218849DA900171D7E /* RosterNamesStore.m */,
-				4EAF161D1884A1E800171D7E /* AddNewCodeFellowViewController.h */,
-				4EAF161E1884A1E800171D7E /* AddNewCodeFellowViewController.m */,
-				4EBD23401884A9ED0019E705 /* CodeFellowDetailViewController.h */,
-				4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */,
-				4EBD23431884B3D80019E705 /* CodeFellow.h */,
-				4EBD23441884B3D80019E705 /* CodeFellow.m */,
-				4E20A0401885E62700D267CC /* NamesController.h */,
-				4E20A0411885E62700D267CC /* NamesController.m */,
-				4E3A1B121886384700424E5D /* NamesTableViewDataSource.h */,
-				4E3A1B131886384700424E5D /* NamesTableViewDataSource.m */,
 			);
 			path = RosterApp;
 			sourceTree = "<group>";
@@ -296,13 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EAF15F318849A9900171D7E /* ViewController.m in Sources */,
-				4EAF161318849DA900171D7E /* RosterNamesStore.m in Sources */,
+				4EAF161318849DA900171D7E /* ModelController.m in Sources */,
 				4EAF15ED18849A9900171D7E /* AppDelegate.m in Sources */,
-				4E3A1B141886384700424E5D /* NamesTableViewDataSource.m in Sources */,
 				4EAF15E918849A9900171D7E /* main.m in Sources */,
-				4E20A0421885E62700D267CC /* NamesController.m in Sources */,
 				4EBD23421884A9ED0019E705 /* CodeFellowDetailViewController.m in Sources */,
-				4EAF161F1884A1E800171D7E /* AddNewCodeFellowViewController.m in Sources */,
 				4EBD23451884B3D80019E705 /* CodeFellow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
