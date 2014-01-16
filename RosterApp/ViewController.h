@@ -10,7 +10,7 @@
 #import "ModelController.h"
 #import "CodeFellowDetailViewController.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UIActionSheetDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UIActionSheetDelegate, DetailViewControllerDelegate>
 
 @property (nonatomic) ModelController *nameStore;
 

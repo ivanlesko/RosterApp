@@ -48,15 +48,17 @@
     [self.namesTableView addSubview:self.refreshControl];
 }
 
+#pragma mark - Table View Methods
+
 - (void)refreshTableView
 {
     [self.refreshControl beginRefreshing];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
+//}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -65,6 +67,8 @@
         NSIndexPath *indexPath = [self.namesTableView indexPathForSelectedRow];
         
         CodeFellowDetailViewController *detailVC = [segue destinationViewController];
+        detailVC.delegate = self;
+        detailVC.profileView = [[RoundedProfileView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
         
         if (indexPath.section == 0) {
             detailVC.theCodeFellow = [[self.nameStore teachers] objectAtIndex:indexPath.row];
@@ -113,6 +117,23 @@
          * The sort descriptor is working, but the table is not updating.
          */
     }
+}
+
+#pragma mark - Detail View Controller Delegate Methods
+
+- (void)updatedCodeFellowInfo:(CodeFellow *)theCodeFellow
+{
+    NSIndexPath *indexPath;
+    
+    if ([theCodeFellow.category isEqualToString:@"Teacher"]) {
+        indexPath = [NSIndexPath indexPathForRow:[[self.nameStore teachers] indexOfObject:theCodeFellow] inSection:0];
+    } else if ([theCodeFellow.category isEqualToString:@"Student"]) {
+        indexPath = [NSIndexPath indexPathForRow:[[self.nameStore students] indexOfObject:theCodeFellow] inSection: 1];
+    }
+    
+    [self.namesTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

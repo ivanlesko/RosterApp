@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CodeFellow.h"
+#import "RoundedProfileView.h"
 
 /**
  * ModelController is a singleton model object that contains

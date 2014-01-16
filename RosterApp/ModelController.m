@@ -110,15 +110,24 @@
     
     CodeFellow *codeFellow;
     
+    RoundedProfileView *profileImage = [[RoundedProfileView alloc] initWithFrame:cell.imageView.frame];
+    NSLog(@"%@", NSStringFromCGRect(profileImage.frame));
+    
     if (indexPath.section == 0) {
         codeFellow = [teachers objectAtIndex:indexPath.row];
         name = codeFellow.name;
+        profileImage.profileImage = codeFellow.profileImage;
     } else if (indexPath.section == 1) {
         codeFellow = [students objectAtIndex:indexPath.row];
         name = codeFellow.name;
+        profileImage.profileImage = codeFellow.profileImage;
     }
     
     cell.textLabel.text = name;
+
+    cell.imageView.image = profileImage.profileImage;
+    
+    [cell.contentView addSubview:profileImage];
     
     return cell;
 }

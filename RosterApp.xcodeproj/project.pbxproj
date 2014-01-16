@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E20A03F1885DC5000D267CC /* Bootcamp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E20A03E1885DC5000D267CC /* Bootcamp.plist */; };
 		4E3A1B1B188641D800424E5D /* codeFellowsBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E3A1B1A188641D800424E5D /* codeFellowsBG.png */; };
+		4E84F71318879F3300EB5F20 /* RoundedProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E84F71218879F3300EB5F20 /* RoundedProfileView.m */; };
 		4EAF15DD18849A9900171D7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF15DC18849A9900171D7E /* Foundation.framework */; };
 		4EAF15DF18849A9900171D7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF15DE18849A9900171D7E /* CoreGraphics.framework */; };
 		4EAF15E118849A9900171D7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAF15E018849A9900171D7E /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		4E20A03E1885DC5000D267CC /* Bootcamp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Bootcamp.plist; sourceTree = "<group>"; };
 		4E3A1B1A188641D800424E5D /* codeFellowsBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = codeFellowsBG.png; sourceTree = "<group>"; };
+		4E84F71118879F3300EB5F20 /* RoundedProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedProfileView.h; sourceTree = "<group>"; };
+		4E84F71218879F3300EB5F20 /* RoundedProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedProfileView.m; sourceTree = "<group>"; };
 		4EAF15D918849A9900171D7E /* RosterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RosterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EAF15DC18849A9900171D7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EAF15DE18849A9900171D7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +98,12 @@
 		4E1016BD18870A060073D554 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4EAF15F118849A9900171D7E /* ViewController.h */,
+				4EAF15F218849A9900171D7E /* ViewController.m */,
+				4EAF161118849DA900171D7E /* ModelController.h */,
+				4EAF161218849DA900171D7E /* ModelController.m */,
+				4EBD23401884A9ED0019E705 /* CodeFellowDetailViewController.h */,
+				4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -102,6 +111,8 @@
 		4E1016BE18870A0D0073D554 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4E84F71118879F3300EB5F20 /* RoundedProfileView.h */,
+				4E84F71218879F3300EB5F20 /* RoundedProfileView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -109,8 +120,6 @@
 		4E1016BF18870A120073D554 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4EAF161118849DA900171D7E /* ModelController.h */,
-				4EAF161218849DA900171D7E /* ModelController.m */,
 				4EBD23431884B3D80019E705 /* CodeFellow.h */,
 				4EBD23441884B3D80019E705 /* CodeFellow.m */,
 			);
@@ -161,10 +170,6 @@
 				4E1016BF18870A120073D554 /* Models */,
 				4E1016BE18870A0D0073D554 /* Views */,
 				4E1016BD18870A060073D554 /* Controllers */,
-				4EAF15F118849A9900171D7E /* ViewController.h */,
-				4EAF15F218849A9900171D7E /* ViewController.m */,
-				4EBD23401884A9ED0019E705 /* CodeFellowDetailViewController.h */,
-				4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */,
 				4E3A1B1518863E3900424E5D /* Images */,
 				4E20A03E1885DC5000D267CC /* Bootcamp.plist */,
 				4EAF15EB18849A9900171D7E /* AppDelegate.h */,
@@ -305,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EAF15F318849A9900171D7E /* ViewController.m in Sources */,
+				4E84F71318879F3300EB5F20 /* RoundedProfileView.m in Sources */,
 				4EAF161318849DA900171D7E /* ModelController.m in Sources */,
 				4EAF15ED18849A9900171D7E /* AppDelegate.m in Sources */,
 				4EAF15E918849A9900171D7E /* main.m in Sources */,
