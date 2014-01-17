@@ -10,6 +10,6 @@
 
 @interface RoundedProfileView : UIView
 
-@property (nonatomic, weak) UIImage *profileImage;
+@property (nonatomic) UIImageView *profileImageView;
 
 @end

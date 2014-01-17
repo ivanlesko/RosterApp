@@ -46,6 +46,8 @@
                   forControlEvents:UIControlEventValueChanged];
     
     [self.namesTableView addSubview:self.refreshControl];
+    
+    [self.namesTableView reloadData];
 }
 
 #pragma mark - Table View Methods
@@ -55,11 +57,6 @@
     [self.refreshControl beginRefreshing];
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
-//}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"detailSegue"]) {
@@ -68,14 +65,19 @@
         
         CodeFellowDetailViewController *detailVC = [segue destinationViewController];
         detailVC.delegate = self;
-        detailVC.profileView = [[RoundedProfileView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
         
         if (indexPath.section == 0) {
             detailVC.theCodeFellow = [[self.nameStore teachers] objectAtIndex:indexPath.row];
+            NSLog(@"selected code fellow: %@", detailVC.theCodeFellow);
         } else if (indexPath.section == 1) {
             detailVC.theCodeFellow = [[self.nameStore students] objectAtIndex:indexPath.row];
         }
     }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"detailSegue" sender:nil];
 }
 
 #pragma mark - Sort Action Sheet Methods
@@ -99,9 +101,7 @@
         
         [self.nameStore sortCodeFellowsUsingSortDescriptors:sortDescriptors];
         
-        [self.namesTableView reloadData];
-        
-        NSLog(@"Ascending");
+        [self.namesTableView reloadData];;
     }
     
     if (buttonIndex == 1) {
@@ -131,7 +131,7 @@
         indexPath = [NSIndexPath indexPathForRow:[[self.nameStore students] indexOfObject:theCodeFellow] inSection: 1];
     }
     
-    [self.namesTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.namesTableView reloadData];
     
     [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
 }

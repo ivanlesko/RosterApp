@@ -14,7 +14,9 @@
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *github;
 @property (nonatomic, strong) NSString *twitter;
+
 @property (nonatomic, strong) UIImage  *profileImage;
+@property (nonatomic, strong) NSString *profileImagePath;
 
 /** This is the designated initializer */
 - (id)initWithName:(NSString *)theName

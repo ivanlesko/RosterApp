@@ -27,6 +27,11 @@
 		4EAF161318849DA900171D7E /* ModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF161218849DA900171D7E /* ModelController.m */; };
 		4EBD23421884A9ED0019E705 /* CodeFellowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */; };
 		4EBD23451884B3D80019E705 /* CodeFellow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBD23441884B3D80019E705 /* CodeFellow.m */; };
+		4EF0CC591888484F00452FFA /* favicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EF0CC581888484F00452FFA /* favicon.jpg */; };
+		4EF0CC9C18887E5100452FFA /* emptyProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EF0CC9B18887E5100452FFA /* emptyProfile.png */; };
+		4EF0CC9F18887EA100452FFA /* CodeFellowUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF0CC9E18887EA100452FFA /* CodeFellowUITableViewCell.m */; };
+		4EF0CCE7188910D600452FFA /* githubIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EF0CCE5188910D600452FFA /* githubIcon.png */; };
+		4EF0CCEA1889117200452FFA /* twittericon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EF0CCE91889117200452FFA /* twittericon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,12 @@
 		4EBD23411884A9ED0019E705 /* CodeFellowDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeFellowDetailViewController.m; sourceTree = "<group>"; };
 		4EBD23431884B3D80019E705 /* CodeFellow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeFellow.h; sourceTree = "<group>"; };
 		4EBD23441884B3D80019E705 /* CodeFellow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeFellow.m; sourceTree = "<group>"; };
+		4EF0CC581888484F00452FFA /* favicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = favicon.jpg; sourceTree = "<group>"; };
+		4EF0CC9B18887E5100452FFA /* emptyProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyProfile.png; sourceTree = "<group>"; };
+		4EF0CC9D18887EA100452FFA /* CodeFellowUITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeFellowUITableViewCell.h; sourceTree = "<group>"; };
+		4EF0CC9E18887EA100452FFA /* CodeFellowUITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeFellowUITableViewCell.m; sourceTree = "<group>"; };
+		4EF0CCE5188910D600452FFA /* githubIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = githubIcon.png; sourceTree = "<group>"; };
+		4EF0CCE91889117200452FFA /* twittericon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twittericon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +124,8 @@
 			children = (
 				4E84F71118879F3300EB5F20 /* RoundedProfileView.h */,
 				4E84F71218879F3300EB5F20 /* RoundedProfileView.m */,
+				4EF0CC9D18887EA100452FFA /* CodeFellowUITableViewCell.h */,
+				4EF0CC9E18887EA100452FFA /* CodeFellowUITableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -129,7 +142,10 @@
 		4E3A1B1518863E3900424E5D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4EF0CC581888484F00452FFA /* favicon.jpg */,
 				4E3A1B1A188641D800424E5D /* codeFellowsBG.png */,
+				4EF0CCE5188910D600452FFA /* githubIcon.png */,
+				4EF0CCE91889117200452FFA /* twittericon.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -172,6 +188,7 @@
 				4E1016BD18870A060073D554 /* Controllers */,
 				4E3A1B1518863E3900424E5D /* Images */,
 				4E20A03E1885DC5000D267CC /* Bootcamp.plist */,
+				4EF0CC9B18887E5100452FFA /* emptyProfile.png */,
 				4EAF15EB18849A9900171D7E /* AppDelegate.h */,
 				4EAF15EC18849A9900171D7E /* AppDelegate.m */,
 				4EAF15EE18849A9900171D7E /* Main.storyboard */,
@@ -287,8 +304,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EAF15F518849A9900171D7E /* Images.xcassets in Resources */,
+				4EF0CC9C18887E5100452FFA /* emptyProfile.png in Resources */,
 				4E3A1B1B188641D800424E5D /* codeFellowsBG.png in Resources */,
+				4EF0CC591888484F00452FFA /* favicon.jpg in Resources */,
 				4E20A03F1885DC5000D267CC /* Bootcamp.plist in Resources */,
+				4EF0CCE7188910D600452FFA /* githubIcon.png in Resources */,
+				4EF0CCEA1889117200452FFA /* twittericon.png in Resources */,
 				4EAF15E718849A9900171D7E /* InfoPlist.strings in Resources */,
 				4EAF15F018849A9900171D7E /* Main.storyboard in Resources */,
 			);
@@ -312,6 +333,7 @@
 				4EAF15F318849A9900171D7E /* ViewController.m in Sources */,
 				4E84F71318879F3300EB5F20 /* RoundedProfileView.m in Sources */,
 				4EAF161318849DA900171D7E /* ModelController.m in Sources */,
+				4EF0CC9F18887EA100452FFA /* CodeFellowUITableViewCell.m in Sources */,
 				4EAF15ED18849A9900171D7E /* AppDelegate.m in Sources */,
 				4EAF15E918849A9900171D7E /* main.m in Sources */,
 				4EBD23421884A9ED0019E705 /* CodeFellowDetailViewController.m in Sources */,

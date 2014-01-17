@@ -14,24 +14,27 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor orangeColor];
+        self.layer.cornerRadius = frame.size.width / 2.0;
+        self.layer.masksToBounds = YES;
         
+        self.profileImageView = [[UIImageView alloc] initWithFrame:frame];
+        self.profileImageView.backgroundColor = [UIColor lightGrayColor];
+        self.profileImageView.image = [UIImage imageNamed:@"emptyProfile.png"];
+        self.profileImageView.layer.cornerRadius = frame.size.width / 2.0;
+        
+        [self addSubview:self.profileImageView];
     }
     return self;
 }
 
 
+/**
+ *
 - (void)drawRect:(CGRect)rect
 {
-    [super drawRect:rect];
-    
-    CGRect bounds = self.bounds;
-    
-    CGColorRef aColor;
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    
-}
 
+}
+ *
+*/
 
 @end

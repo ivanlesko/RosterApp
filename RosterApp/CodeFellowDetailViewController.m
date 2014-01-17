@@ -30,28 +30,54 @@
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    self.profileView.layer.masksToBounds = YES;
-    self.profileView.layer.cornerRadius = self.profileView.bounds.size.width / 2.0;
+
+    self.profileImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.profileImageView.layer.shadowOffset = CGSizeMake(0, 3);
+    self.profileImageView.layer.shadowRadius = 0;
+    self.profileImageView.layer.shadowOpacity = 0.3f;
+    
+    self.nameBackgroundView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.nameBackgroundView.layer.shadowOffset = CGSizeMake(0, 3);
+    self.nameBackgroundView.layer.shadowRadius = 0;
+    self.nameBackgroundView.layer.shadowOpacity = 0.3f;
+    
+    [self.view addSubview:self.profileImageView];
+    
+    // Implement the add profile picture button
+    self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(self.profileImageView.frame.origin.x,
+                                                                self.profileImageView.frame.origin.y,
+                                                                self.profileImageView.frame.size.width,
+                                                                self.profileImageView.frame.size.height - self.profileImageView.frame.size.height * 0.4f)];
+    self.addButton.backgroundColor = [UIColor clearColor];
+    self.addButton.titleLabel.textColor = [UIColor whiteColor];
+    self.addButton.titleLabel.font = [UIFont systemFontOfSize:100];
+    [self.addButton setTitle:@"+" forState:UIControlStateNormal];
+    
+    [self.addButton addTarget:self
+                       action:@selector(addProfilePic)
+             forControlEvents:UIControlEventTouchDown];
+    
+    [self.view addSubview:self.addButton];
+    
+    self.nameLabel.text = self.theCodeFellow.name;
+    
+    NSLog(@"%@", self.navigationController);
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navItem.title = [NSString stringWithFormat:@"%@", self.theCodeFellow.name];
     
-    if (self.theCodeFellow.profileImage) {
-        self.profileView.profileImage = self.theCodeFellow.profileImage;
-        self.profileView.layer.cornerRadius = self.profileView.bounds.size.width / 2.0;
-        
-        self.addButton.enabled = NO;
+    // If the Code Fellow DOES have a profile image..
+    if (!self.theCodeFellow.profileImage) {
+        self.profileImageView.image = [UIImage imageNamed:@"emptyProfile.png"];
+    } else {
+        self.profileImageView.image = self.theCodeFellow.profileImage;
         [self.addButton setTitle:@"" forState:UIControlStateNormal];
+        self.addButton.enabled = NO;
     }
-    
-    self.profileView = [[RoundedProfileView alloc] initWithFrame:CGRectMake(self.addButton.frame.origin.x,
-                                                                            self.addButton.frame.origin.y,
-                                                                            200,
-                                                                            200)];
-    
-    [self.view insertSubview:self.profileView atIndex:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -69,7 +95,7 @@
 
 #pragma mark - Action Sheet Methods
 
-- (IBAction)addProfilePic:(id)sender
+- (void)addProfilePic
 {
     UIActionSheet *sheet;
     
@@ -97,6 +123,8 @@
     imagePicker.allowsEditing = YES;
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Cancel"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     
     [self presentViewController:imagePicker animated:YES completion:nil];
@@ -106,9 +134,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:^{
         UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        self.profileView.layer.cornerRadius = self.profileView.bounds.size.width / 2.0;
-        self.profileView.layer.masksToBounds = YES;
-        self.profileView.profileImage = editedImage;
+        self.profileImageView.image = editedImage;
         self.theCodeFellow.profileImage = editedImage;
         
         self.addButton.enabled = NO;
@@ -130,23 +156,33 @@
             }];
         } else {
             // If the app DOES have access to the photo library
-            NSData *photoData = UIImagePNGRepresentation(editedImage);
-            NSString *studentPNGsavePath = [NSString stringWithFormat:@"%@_profile.png", self.theCodeFellow.name];
-            NSString *PNGSavePath = [[self docsDirPath] stringByAppendingString:studentPNGsavePath];
-            [photoData writeToFile:PNGSavePath atomically:YES];
+            
+            [self saveImageToCodeFellow:editedImage];
         }
-        
     }];
+}
+
+- (void)saveImageToCodeFellow:(UIImage *)theImage
+{
+    NSData *photoData = UIImagePNGRepresentation(theImage);
+    NSString *studentPNGsavePath = [NSString stringWithFormat:@"%@_profilePic.png", self.theCodeFellow.name];
+    self.theCodeFellow.profileImagePath = studentPNGsavePath;
+    self.theCodeFellow.profileImage = theImage;
+    NSString *PNGSavePath = [[self docsDirPath] stringByAppendingString:studentPNGsavePath];
+    [photoData writeToFile:PNGSavePath atomically:YES];
+    
+    NSLog(@"Saved to: %@", PNGSavePath);
 }
 
 #pragma mark - Documents Directory
 
 - (NSString *)docsDirPath
 {
-    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    NSString *documentPath = [searchPaths lastObject];
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [searchPaths lastObject];
+    NSString *documentsPath = [documentsDirectory stringByAppendingString:@"/"];
     
-    return documentPath;
+    return documentsPath;
 }
 
 

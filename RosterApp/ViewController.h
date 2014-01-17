@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ModelController.h"
 #import "CodeFellowDetailViewController.h"
+#import "CodeFellowUITableViewCell.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UIActionSheetDelegate, DetailViewControllerDelegate>
 

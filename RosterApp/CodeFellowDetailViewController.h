@@ -27,12 +27,24 @@
 
 @property (weak, nonatomic) CodeFellow *theCodeFellow;
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
-@property (weak, nonatomic) IBOutlet UIButton *addButton;
-@property (nonatomic) RoundedProfileView *profileView;
+@property (strong, nonatomic) UIButton *addButton;
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *twitterImageView;
+@property (weak, nonatomic) IBOutlet UITextField *twitterTextField;
+
+@property (weak, nonatomic) IBOutlet UIImageView *githubImageView;
+@property (weak, nonatomic) IBOutlet UITextField *githubTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIView *nameBackgroundView;
+
+
 
 @property id delegate;
 
-- (IBAction)addProfilePic:(id)sender;
+- (void)addProfilePic;
+- (void)saveImageToCodeFellow:(UIImage *)theImage;
 
 
 @end

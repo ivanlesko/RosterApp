@@ -14,10 +14,14 @@
 {
     self = [super init];
     if (self) {
+        // Dummy Checks
         self.name     = @"Missing Name";
         self.category = @"Missing Category";
         self.github   = @"Missing Github";
         self.twitter  = @"Missing Twitter";
+
+        self.profileImage = nil;
+        self.profileImagePath = nil;
     }
     
     return self;

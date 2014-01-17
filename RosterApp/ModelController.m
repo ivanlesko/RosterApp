@@ -104,30 +104,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nameCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CodeFellowCell"];
+    
+    if (cell.imageView.image) {
+        cell.imageView.image = nil;
+    }
     
     NSString *name;
     
     CodeFellow *codeFellow;
     
-    RoundedProfileView *profileImage = [[RoundedProfileView alloc] initWithFrame:cell.imageView.frame];
-    NSLog(@"%@", NSStringFromCGRect(profileImage.frame));
-    
     if (indexPath.section == 0) {
         codeFellow = [teachers objectAtIndex:indexPath.row];
         name = codeFellow.name;
-        profileImage.profileImage = codeFellow.profileImage;
     } else if (indexPath.section == 1) {
         codeFellow = [students objectAtIndex:indexPath.row];
         name = codeFellow.name;
-        profileImage.profileImage = codeFellow.profileImage;
+    }
+    
+    if (!cell.imageView.image) {
+        cell.imageView.image = [UIImage imageNamed:@"emptyProfile.png"];
+    } else {
+        cell.imageView.image = codeFellow.profileImage;
     }
     
     cell.textLabel.text = name;
-
-    cell.imageView.image = profileImage.profileImage;
-    
-    [cell.contentView addSubview:profileImage];
     
     return cell;
 }
