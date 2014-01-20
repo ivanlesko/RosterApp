@@ -30,17 +30,6 @@
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-
-    self.profileImageView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.profileImageView.layer.shadowOffset = CGSizeMake(0, 3);
-    self.profileImageView.layer.shadowRadius = 0;
-    self.profileImageView.layer.shadowOpacity = 0.3f;
-    
-    self.nameBackgroundView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.nameBackgroundView.layer.shadowOffset = CGSizeMake(0, 3);
-    self.nameBackgroundView.layer.shadowRadius = 0;
-    self.nameBackgroundView.layer.shadowOpacity = 0.3f;
-    
     [self.view addSubview:self.profileImageView];
     
     // Implement the add profile picture button
@@ -61,9 +50,8 @@
     
     self.nameLabel.text = self.theCodeFellow.name;
     
-    NSLog(@"%@", self.navigationController);
-    
-    
+    self.twitterTextField.delegate = self;
+    self.githubTextField.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,7 +72,17 @@
 {
     [super viewWillDisappear:animated];
     
+    self.theCodeFellow.twitter = self.twitterTextField.text;
+    
+    NSString *githubURL = [NSString stringWithFormat:@"http://www.github.com/%@", self.githubTextField.text];
+    self.theCodeFellow.github  = githubURL;
+    
     [self.delegate updatedCodeFellowInfo:self.theCodeFellow];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,11 +121,11 @@
     imagePicker.allowsEditing = YES;
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:imagePicker animated:YES completion:nil];
     } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Cancel"]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -168,10 +166,13 @@
     NSString *studentPNGsavePath = [NSString stringWithFormat:@"%@_profilePic.png", self.theCodeFellow.name];
     self.theCodeFellow.profileImagePath = studentPNGsavePath;
     self.theCodeFellow.profileImage = theImage;
+    self.theCodeFellow.profileImagePath = studentPNGsavePath;
     NSString *PNGSavePath = [[self docsDirPath] stringByAppendingString:studentPNGsavePath];
     [photoData writeToFile:PNGSavePath atomically:YES];
     
     NSLog(@"Saved to: %@", PNGSavePath);
+    
+    [self.delegate saveData];
 }
 
 #pragma mark - Documents Directory
@@ -185,6 +186,47 @@
     return documentsPath;
 }
 
+- (void) addDropShadowToLayer:(CALayer *)theLayer withShadowSize:(CGFloat)floatSize
+{
+    theLayer.shadowColor = [[UIColor blackColor] CGColor];
+    theLayer.shadowOffset = CGSizeMake(0, floatSize);
+    theLayer.shadowRadius = 0;
+    theLayer.shadowOpacity = 0.3f;
+}
 
+- (UIImage *)applyBlurOnImage: (UIImage *)imageToBlur
+                   withRadius: (CGFloat)blurRadius {
+    
+    CIImage *originalImage = [CIImage imageWithCGImage: imageToBlur.CGImage];
+    CIFilter *filter = [CIFilter filterWithName: @"CIGaussianBlur"
+                                  keysAndValues: kCIInputImageKey, originalImage,
+                        @"inputRadius", @(blurRadius), nil];
+    
+    CIImage *outputImage = filter.outputImage;
+    CIContext *context = [CIContext contextWithOptions:nil];
+    
+    CGImageRef outImage = [context createCGImage: outputImage
+                                        fromRect: [outputImage extent]];
+    return [UIImage imageWithCGImage: outImage];
+}
+
+#pragma mark - Text Field Delegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"textField: %@", textField);
+    
+    return YES;
+}
 
 @end
+
+
+
+
+
+
+
+
+
+

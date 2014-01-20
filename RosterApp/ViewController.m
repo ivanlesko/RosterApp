@@ -68,7 +68,6 @@
         
         if (indexPath.section == 0) {
             detailVC.theCodeFellow = [[self.nameStore teachers] objectAtIndex:indexPath.row];
-            NSLog(@"selected code fellow: %@", detailVC.theCodeFellow);
         } else if (indexPath.section == 1) {
             detailVC.theCodeFellow = [[self.nameStore students] objectAtIndex:indexPath.row];
         }
@@ -101,7 +100,7 @@
         
         [self.nameStore sortCodeFellowsUsingSortDescriptors:sortDescriptors];
         
-        [self.namesTableView reloadData];;
+        [self.namesTableView reloadData];
     }
     
     if (buttonIndex == 1) {
@@ -111,11 +110,6 @@
         [self.nameStore sortCodeFellowsUsingSortDescriptors:sortDescriptors];
         
         [self.namesTableView reloadData];
-        
-        /**
-         * Need to figure out why the table view is not reloading the rows.
-         * The sort descriptor is working, but the table is not updating.
-         */
     }
 }
 
@@ -131,9 +125,32 @@
         indexPath = [NSIndexPath indexPathForRow:[[self.nameStore students] indexOfObject:theCodeFellow] inSection: 1];
     }
     
-    [self.namesTableView reloadData];
+    [self.namesTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    
+    UITableViewCell *cell = [self.namesTableView cellForRowAtIndexPath:indexPath];
+    cell.imageView.image = theCodeFellow.profileImage;
     
     [self.namesTableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)saveData
+{
+    [NSKeyedArchiver archiveRootObject:self.nameStore.listOfCodeFellows toFile:[self codeFellowsArchivePath]];
+    NSLog(@"saving data to: %@", [self codeFellowsArchivePath]);
+}
+
+- (NSString *)docsDirPath
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [searchPaths lastObject];
+    NSString *documentsPath = [documentsDirectory stringByAppendingString:@"/"];
+    
+    return documentsPath;
+}
+
+- (NSString *)codeFellowsArchivePath
+{
+    return [[self docsDirPath] stringByAppendingString:@"archive/"];
 }
 
 @end

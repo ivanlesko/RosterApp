@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CodeFellow.h"
 
 @interface CodeFellowUITableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak)CodeFellow *codeFellow;
 
 @end

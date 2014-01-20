@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-
+        
     }
     
     return self;
@@ -24,13 +24,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.imageView.layer.masksToBounds = YES;
-        self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2.0;
-        
-        self.imageView.frame = CGRectMake(self.imageView.frame.origin.x,
-                                          self.imageView.frame.origin.y,
-                                          self.imageView.bounds.size.width * 0.8,
-                                          self.imageView.bounds.size.height * 0.8);
+
     }
     return self;
 }
@@ -42,9 +36,29 @@
     // Configure the view for the selected state
 }
 
-- (void)setNameLabel:(UILabel *)nameLabel
+- (void)setCodeFellow:(CodeFellow *)codeFellow
 {
-    NSLog(@"setting name label");
+    self.textLabel.text = codeFellow.name;
+    self.imageView.image = codeFellow.profileImage;
+    
+    if (!self.imageView.image) {
+        self.imageView.image = [UIImage imageNamed:@"emptyProfile.png"];
+        self.imageView.layer.cornerRadius = 10.0f;
+    }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.imageView.layer.masksToBounds = YES;
+    
+    self.imageView.bounds = CGRectMake(0,
+                                       0,
+                                       self.imageView.bounds.size.width  * 0.9,
+                                       self.imageView.bounds.size.height * 0.9);
+    
+    self.imageView.layer.cornerRadius = self.imageView.bounds.size.width / 2.0;
 }
 
 @end

@@ -15,7 +15,7 @@
     self = [super init];
     if (self) {
         
-        self.listOfCodeFellows  = [NSMutableArray array];
+        self.listOfCodeFellows  = [NSKeyedUnarchiver unarchiveObjectWithFile:[self codeFellowsArchivePath]];
         teachers = [NSMutableArray array];
         students = [NSMutableArray array];
         
@@ -104,31 +104,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CodeFellowCell"];
-    
-    if (cell.imageView.image) {
-        cell.imageView.image = nil;
-    }
-    
-    NSString *name;
+    CodeFellowUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CodeFellowCell"];
     
     CodeFellow *codeFellow;
     
     if (indexPath.section == 0) {
         codeFellow = [teachers objectAtIndex:indexPath.row];
-        name = codeFellow.name;
     } else if (indexPath.section == 1) {
         codeFellow = [students objectAtIndex:indexPath.row];
-        name = codeFellow.name;
     }
     
-    if (!cell.imageView.image) {
-        cell.imageView.image = [UIImage imageNamed:@"emptyProfile.png"];
-    } else {
-        cell.imageView.image = codeFellow.profileImage;
-    }
-    
-    cell.textLabel.text = name;
+    cell.codeFellow = codeFellow;
     
     return cell;
 }
@@ -178,6 +164,19 @@
     return title;
 }
 
+- (NSString *)docsDirPath
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [searchPaths lastObject];
+    NSString *documentsPath = [documentsDirectory stringByAppendingString:@"/"];
+    
+    return documentsPath;
+}
+
+- (NSString *)codeFellowsArchivePath
+{
+    return [[self docsDirPath] stringByAppendingString:@"archive/"];
+}
 
 @end
 
